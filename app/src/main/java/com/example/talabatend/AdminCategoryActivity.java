@@ -1,11 +1,11 @@
 package com.example.talabatend;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class AdminCategoryActivity extends AppCompatActivity {
 
@@ -18,7 +18,6 @@ public class AdminCategoryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_category);
-
         tshirts = (ImageView)findViewById(R.id.t_shirts);
         sportsshirts = (ImageView)findViewById(R.id.sports_t_shirt);
         femaledresses = (ImageView)findViewById(R.id.female_dresses);

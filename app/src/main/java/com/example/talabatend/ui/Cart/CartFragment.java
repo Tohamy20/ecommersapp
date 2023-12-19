@@ -1,5 +1,6 @@
 package com.example.talabatend.ui.Cart;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.talabatend.CartActivity;
 import com.example.talabatend.databinding.FragmentCartBinding;
 
 public class CartFragment extends Fragment {
@@ -31,6 +33,8 @@ public class CartFragment extends Fragment {
 
         final TextView textView = binding.textCart;
         galleryViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        Intent intent = new Intent(getActivity(), CartActivity.class);
+        startActivity(intent);
         return root;
     }
     @Override

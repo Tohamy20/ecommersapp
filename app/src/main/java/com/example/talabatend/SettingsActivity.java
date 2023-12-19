@@ -30,7 +30,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class SettingsActivity extends AppCompatActivity {
 
     private CircleImageView profileimageviewbtn;
-    private EditText fullnameedittxt,userphoneedittxt,addressedittext;
+    private EditText fullnameedittxt,userphoneedittxt,addressedittext,passwordedittxt;
     private TextView profilechangetxtbtn,closetxtbtn,saveTextbutton;
     private Uri imageuri;
     private String myuri = "";
@@ -50,12 +50,13 @@ public class SettingsActivity extends AppCompatActivity {
         fullnameedittxt = (EditText) findViewById(R.id.settings_full_name);
         userphoneedittxt = (EditText) findViewById(R.id.settings_phone_number);
         addressedittext = (EditText) findViewById(R.id.settings_full_address);
+        passwordedittxt = (EditText) findViewById(R.id.settings_new_pass);
         profilechangetxtbtn = (TextView) findViewById(R.id.profile_image_change_btn);
         saveTextbutton = (TextView) findViewById(R.id.update_account_settings_btn);
         closetxtbtn = (TextView) findViewById(R.id.close_settings_btn);
 
 
-        userinfodisplay(profileimageviewbtn,fullnameedittxt,userphoneedittxt,addressedittext);
+        userinfodisplay(profileimageviewbtn,fullnameedittxt,userphoneedittxt,addressedittext,passwordedittxt);
         closetxtbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
@@ -101,7 +102,9 @@ public class SettingsActivity extends AppCompatActivity {
         usermap.put("name",fullnameedittxt.getText().toString());
         usermap.put("address",addressedittext.getText().toString());
         usermap.put("phoneOrder",userphoneedittxt.getText().toString());
+        usermap.put("password",passwordedittxt.getText().toString());
         ref.child(Prevalent.currentonlineuser.getPhone()).updateChildren(usermap);
+        ref.child(Prevalent.currentonlineuser.getPassword()).updateChildren(usermap);
 
 
 
@@ -129,6 +132,11 @@ public class SettingsActivity extends AppCompatActivity {
 
             Toast.makeText(this, "please enter phone ", Toast.LENGTH_SHORT).show();
         }
+        else if (TextUtils.isEmpty(userphoneedittxt.getText().toString()))
+        {
+
+            Toast.makeText(this, "please enter phone ", Toast.LENGTH_SHORT).show();
+        }
 
 
     }
@@ -136,7 +144,7 @@ public class SettingsActivity extends AppCompatActivity {
 
 
 
-    private void userinfodisplay(CircleImageView profileimageviewbtn, EditText fullnameedittxt, EditText userphoneedittxt, EditText addressedittext)
+    private void userinfodisplay(CircleImageView profileimageviewbtn, EditText fullnameedittxt, EditText userphoneedittxt, EditText addressedittext, EditText passwordedittxt)
     {
 
         DatabaseReference userref = FirebaseDatabase.getInstance().getReference().child("Users").child(Prevalent.currentonlineuser.getPhone());
@@ -154,11 +162,13 @@ public class SettingsActivity extends AppCompatActivity {
                         String name =snapshot.child("name").getValue().toString();
                         String phone =snapshot.child("phone").getValue().toString();
                         String address =snapshot.child("address").getValue().toString();
+                        String pass = snapshot.child("password").getValue().toString();
 
                         Picasso.get().load(image).into(profileimageviewbtn);
                         fullnameedittxt.setText(name);
                         userphoneedittxt.setText(phone);
                         addressedittext.setText(address);
+                        passwordedittxt.setText(pass);
 
                     }
                 }

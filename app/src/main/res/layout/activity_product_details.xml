@@ -62,6 +62,38 @@
 
         />
 
+    <Button
+        android:id="@+id/details_quantity_to_cart_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/design_default_color_primary_dark"
+        android:layout_margin="15dp"
+        android:layout_below="@id/product_price_details"
+        android:text="press to add"
+        android:textColor="@color/white"
+        android:textStyle="bold|italic"
+        android:textSize="18dp"
+        android:layout_marginTop="90dp"
+
+        />
+
+    <Button
+        android:id="@+id/details_add_to_cart_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/design_default_color_primary_dark"
+        android:layout_margin="15dp"
+        android:layout_alignParentBottom="true"
+        android:text="Add to cart"
+        android:textColor="@color/white"
+        android:textStyle="bold|italic"
+        android:textSize="18dp"
+
+
+
+
+        />
+
 
 
 

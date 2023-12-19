@@ -1,5 +1,6 @@
 package com.example.talabatend.ui.slideshow;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.talabatend.AdminCategoryActivity;
 import com.example.talabatend.databinding.FragmentSlideshowBinding;
 
 public class SlideshowFragment extends Fragment {
@@ -26,6 +28,8 @@ public class SlideshowFragment extends Fragment {
 
         final TextView textView = binding.textSlideshow;
         slideshowViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        Intent intent = new Intent(getActivity(), AdminCategoryActivity.class);
+        startActivity(intent);
         return root;
     }
 
