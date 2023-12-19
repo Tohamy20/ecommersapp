@@ -1,9 +1,5 @@
 package com.example.talabatend;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -14,6 +10,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -32,7 +32,7 @@ import java.util.HashMap;
 
 public class AdminaddnewProductActivity extends AppCompatActivity {
 
-    private String categoryName,Description,Price,PName,saveCurrentDate,saveCurrentTime;
+    private String categoryName,Description,price,pname,saveCurrentDate,saveCurrentTime;
     private Button Addnewproduct;
     private ImageView productImage;
     private EditText productname,productdescription,productprice;
@@ -53,7 +53,6 @@ public class AdminaddnewProductActivity extends AppCompatActivity {
         categoryName = getIntent().getExtras().get("category").toString();
         productImagesref = FirebaseStorage.getInstance().getReference().child("Product Images");
         productsref = FirebaseDatabase.getInstance().getReference().child("Products");
-
 
         Addnewproduct = (Button) findViewById(R.id.add_new_product);
         productImage = (ImageView) findViewById(R.id.select_product_image);
@@ -106,12 +105,12 @@ public class AdminaddnewProductActivity extends AppCompatActivity {
     private void validateproductdata()
     {
     Description = productdescription.getText().toString();
-    Price       = productprice.getText().toString();
-    PName       = productname.getText().toString();
+    price       = productprice.getText().toString();
+    pname       = productname.getText().toString();
 
         if (imageuri==null)
         {
-            Toast.makeText(this, "Product name is mandatory", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Product image is mandatory", Toast.LENGTH_SHORT).show();
 
 
         }
@@ -120,11 +119,11 @@ public class AdminaddnewProductActivity extends AppCompatActivity {
             Toast.makeText(this, "please write a description", Toast.LENGTH_SHORT).show();
 
         }
-        else if (TextUtils.isEmpty(Price))
+        else if (TextUtils.isEmpty(price))
         {
             Toast.makeText(this, "please write a Price", Toast.LENGTH_SHORT).show();
         }
-        else if (TextUtils.isEmpty(PName))
+        else if (TextUtils.isEmpty(pname))
         {
             Toast.makeText(this, "please write a Name", Toast.LENGTH_SHORT).show();
 
@@ -215,8 +214,8 @@ public class AdminaddnewProductActivity extends AppCompatActivity {
         productmap.put("description",Description);
         productmap.put("image",downloadImageUrl);
         productmap.put("category",categoryName);
-        productmap.put("price",Price);
-        productmap.put("pname",PName);
+        productmap.put("price",price);
+        productmap.put("pname",pname);
 
 
         productsref.child(productRandomKey).updateChildren(productmap)

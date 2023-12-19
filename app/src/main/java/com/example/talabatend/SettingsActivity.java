@@ -30,7 +30,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class SettingsActivity extends AppCompatActivity {
 
     private CircleImageView profileimageviewbtn;
-    private EditText fullnameedittxt,userphoneedittxt,addressedittext,passwordedittxt;
+    private EditText fullnameedittxt,userphoneedittxt,addressedittext,passwordedittxt,editText_yeare,editText_m,editText_d;
     private TextView profilechangetxtbtn,closetxtbtn,saveTextbutton;
     private Uri imageuri;
     private String myuri = "";
@@ -54,6 +54,9 @@ public class SettingsActivity extends AppCompatActivity {
         profilechangetxtbtn = (TextView) findViewById(R.id.profile_image_change_btn);
         saveTextbutton = (TextView) findViewById(R.id.update_account_settings_btn);
         closetxtbtn = (TextView) findViewById(R.id.close_settings_btn);
+        editText_yeare=(EditText) findViewById(R.id.editTextText_year_settings);
+        editText_m=(EditText) findViewById(R.id.editText_month_settings);
+        editText_d=(EditText) findViewById(R.id.editTextText_day_settings);
 
 
         userinfodisplay(profileimageviewbtn,fullnameedittxt,userphoneedittxt,addressedittext,passwordedittxt);
@@ -99,24 +102,69 @@ public class SettingsActivity extends AppCompatActivity {
     {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users");
         HashMap<String,Object> usermap=new HashMap<>();
-        usermap.put("name",fullnameedittxt.getText().toString());
-        usermap.put("address",addressedittext.getText().toString());
-        usermap.put("phoneOrder",userphoneedittxt.getText().toString());
-        usermap.put("password",passwordedittxt.getText().toString());
-        ref.child(Prevalent.currentonlineuser.getPhone()).updateChildren(usermap);
-        ref.child(Prevalent.currentonlineuser.getPassword()).updateChildren(usermap);
+        if (TextUtils.isEmpty(fullnameedittxt.getText().toString()))
+        {
+
+            Toast.makeText(this, "please enter name ", Toast.LENGTH_SHORT).show();
+        }
+        else if (TextUtils.isEmpty(addressedittext.getText().toString()))
+        {
+
+            Toast.makeText(this, "please enter address ", Toast.LENGTH_SHORT).show();
+        }
+        else if (TextUtils.isEmpty(userphoneedittxt.getText().toString()))
+        {
+
+            Toast.makeText(this, "please enter phone ", Toast.LENGTH_SHORT).show();
+        }
+        else if (TextUtils.isEmpty(userphoneedittxt.getText().toString()))
+        {
+
+            Toast.makeText(this, "please enter phone ", Toast.LENGTH_SHORT).show();
+        } else if (TextUtils.isEmpty(editText_yeare.getText().toString()))
+        {
+            Toast.makeText(this, "please enter year ", Toast.LENGTH_SHORT).show();
+
+        } else if (TextUtils.isEmpty(editText_m.getText().toString()))
+        {
+            Toast.makeText(this, "please enter month ", Toast.LENGTH_SHORT).show();
+
+        }
+        else if (TextUtils.isEmpty(editText_d.getText().toString()))
+        {
+            Toast.makeText(this, "please enter Day ", Toast.LENGTH_SHORT).show();
+
+        }
+        else
+        {
+
+            String birth_Y = editText_yeare.getText().toString();
+            String birth_m = editText_m.getText().toString();
+            String birth_d = editText_d.getText().toString();
+            String birth = birth_d + "-" + birth_m + "-" + birth_Y;
+
+            usermap.put("name", fullnameedittxt.getText().toString());
+            usermap.put("address", addressedittext.getText().toString());
+            usermap.put("phoneOrder", userphoneedittxt.getText().toString());
+            usermap.put("password", passwordedittxt.getText().toString());
+            usermap.put("BirthDay", birth);
 
 
+            ref.child(Prevalent.currentonlineuser.getPhone()).updateChildren(usermap);
+            ref.child(Prevalent.currentonlineuser.getPassword()).updateChildren(usermap);
 
-        startActivity(new Intent(SettingsActivity.this,HomeActivity.class));
-        Toast.makeText(SettingsActivity.this, "profile info updated", Toast.LENGTH_SHORT).show();
 
-        finish();
+            startActivity(new Intent(SettingsActivity.this, HomeActivity.class));
+            Toast.makeText(SettingsActivity.this, "profile info updated", Toast.LENGTH_SHORT).show();
+
+            finish();
+        }
     }
 
 
     private void userinfosaved()
     {
+
         if (TextUtils.isEmpty(fullnameedittxt.getText().toString()))
         {
 
@@ -137,6 +185,7 @@ public class SettingsActivity extends AppCompatActivity {
 
             Toast.makeText(this, "please enter phone ", Toast.LENGTH_SHORT).show();
         }
+
 
 
     }

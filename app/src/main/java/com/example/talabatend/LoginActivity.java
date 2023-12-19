@@ -124,7 +124,6 @@ public class LoginActivity extends AppCompatActivity {
 
                 final DatabaseReference RootRef;
                 RootRef = FirebaseDatabase.getInstance().getReference();
-
                 RootRef.addListenerForSingleValueEvent(new ValueEventListener()
                 {
                     @Override

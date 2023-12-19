@@ -32,9 +32,10 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
 private ImageView productimage;
 private TextView productprice,procuctdescription,productname;
-private String productid = "";
+private String productid = "",quantityyy ="1";
+
 private Button addtocartbutton,quantityaddtocartbutton;
-private int quantity = 0;
+private int quantity = 1;
 
 
 
@@ -58,6 +59,7 @@ private int quantity = 0;
                 @Override
                 public void onClick(View v) {
                     quantity++;
+                    quantityyy = Integer.toString(quantity);
 
                 }
             });
@@ -83,7 +85,7 @@ private int quantity = 0;
         savecurrentdate = currentdata.format(calfordate.getTime());
 
         SimpleDateFormat currenttime = new SimpleDateFormat("HH:mm:ss a");
-        savecurrenttime = currentdata.format(calfordate.getTime());
+        savecurrenttime = currenttime.format(calfordate.getTime());
         final DatabaseReference cartlistrefrence = FirebaseDatabase.getInstance().getReference().child("Cart List");
         final HashMap<String,Object> cartmap=new HashMap<>();
         cartmap.put("pid",productid);
@@ -91,7 +93,7 @@ private int quantity = 0;
         cartmap.put("price",productprice.getText().toString());
         cartmap.put("date",savecurrentdate);
         cartmap.put("time",savecurrenttime);
-        cartmap.put("quantity",quantity);
+        cartmap.put("quantity",quantityyy);
         cartmap.put("discount","");
 
         cartlistrefrence.child("User View").child(Prevalent.currentonlineuser.getPhone())
