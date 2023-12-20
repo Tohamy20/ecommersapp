@@ -1,5 +1,6 @@
 package com.example.talabatend;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,6 +57,20 @@ public class AdminNewOrdersActivity extends AppCompatActivity
                             holder.usertotalprice.setText("total price = $ :" + model.getTotalamount());
                             holder.userdatetime.setText("Date :" + model.getDate() + " " + model.getTime());
                             holder.usershippingaddress.setText("Address :" + model.getAddress() + "," + model.getCity() );
+
+
+
+                            holder.showordersbtn.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+
+                                    String uid = getRef(position).getKey();
+                                    Intent intent = new Intent(AdminNewOrdersActivity.this, AdminUserProductsActivity.class);
+                                    intent.putExtra("uid",uid);
+                                    startActivity(intent);
+
+                                }
+                            });
 
 
 

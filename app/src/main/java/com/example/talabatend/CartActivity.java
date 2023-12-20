@@ -99,6 +99,7 @@ public class CartActivity extends AppCompatActivity
                         holder.txtproductquantity.setText( "Quantity "+ model.getQuantity());
                         holder.txtproductprice.setText(model.getPrice());
                         holder.txtproductname.setText(model.getPname());
+
                         int onetypeproductTPrice = ((Integer.valueOf(model.getPrice()))) * Integer.valueOf(model.getQuantity());
 
                         overtotalprice = overtotalprice + onetypeproductTPrice;
