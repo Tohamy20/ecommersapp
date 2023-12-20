@@ -1,4 +1,4 @@
-package com.example.talabatend;
+package com.example.talabatend.Admin;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.talabatend.R;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -224,7 +225,7 @@ public class AdminaddnewProductActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful())
                         {
-                            Intent intent = new Intent(AdminaddnewProductActivity.this,AdminCategoryActivity.class);
+                            Intent intent = new Intent(AdminaddnewProductActivity.this, AdminCategoryActivity.class);
                             startActivity(intent);
                             loadingbar.dismiss();
                             Toast.makeText(AdminaddnewProductActivity.this, "Product added successfully.....", Toast.LENGTH_SHORT).show();

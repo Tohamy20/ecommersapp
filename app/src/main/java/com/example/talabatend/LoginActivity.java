@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.talabatend.Admin.AdminCategoryActivity;
 import com.example.talabatend.Model.Users;
 import com.example.talabatend.Prevalent.Prevalent;
 import com.google.firebase.database.DataSnapshot;
@@ -140,7 +141,7 @@ public class LoginActivity extends AppCompatActivity {
                                         {
                                             Toast.makeText(LoginActivity.this, "Welcome admin " + phone + ", you Logged in successfully", Toast.LENGTH_SHORT).show();
                                             loadingbar.dismiss();
-                                            Intent intent = new Intent(LoginActivity.this,AdminCategoryActivity.class);
+                                            Intent intent = new Intent(LoginActivity.this, AdminCategoryActivity.class);
                                             startActivity(intent);
                                         } else if (parentdbname.equals("Users"))
                                         {

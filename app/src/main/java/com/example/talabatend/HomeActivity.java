@@ -18,6 +18,7 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.talabatend.Admin.AdminMaintainProductsActivity;
 import com.example.talabatend.Model.product;
 import com.example.talabatend.Prevalent.Prevalent;
 import com.example.talabatend.databinding.ActivityHomeBinding;
@@ -66,9 +67,14 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
+                if (!type.equals("Admin"))
+                {
+                    Intent intent = new Intent(HomeActivity.this, CartActivity.class);
+                    startActivity(intent);
+                }
 
-                Intent intent = new Intent(HomeActivity.this, CartActivity.class);
-                startActivity(intent);
+
+
 
             }
         });

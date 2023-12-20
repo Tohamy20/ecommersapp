@@ -1,4 +1,4 @@
-package com.example.talabatend;
+package com.example.talabatend.Admin;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.talabatend.HomeActivity;
+import com.example.talabatend.MainActivity;
+import com.example.talabatend.R;
 
 public class AdminCategoryActivity extends AppCompatActivity {
 
@@ -31,7 +35,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(AdminCategoryActivity.this,HomeActivity.class);
+                Intent intent = new Intent(AdminCategoryActivity.this, HomeActivity.class);
                 intent.putExtra("Admin","Admin");
                 startActivity(intent);
 
@@ -46,7 +50,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
             public void onClick(View v)
             {
 
-                    Intent intent = new Intent(AdminCategoryActivity.this,MainActivity.class);
+                    Intent intent = new Intent(AdminCategoryActivity.this, MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     finish();
@@ -59,7 +63,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(AdminCategoryActivity.this,AdminNewOrdersActivity.class);
+                Intent intent = new Intent(AdminCategoryActivity.this, AdminNewOrdersActivity.class);
 
                 startActivity(intent);
             }
@@ -86,7 +90,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(AdminCategoryActivity.this,AdminaddnewProductActivity.class);
+                Intent intent = new Intent(AdminCategoryActivity.this, AdminaddnewProductActivity.class);
 
                 intent.putExtra("category","tshirts");
                 startActivity(intent);

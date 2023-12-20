@@ -1,4 +1,4 @@
-package com.example.talabatend;
+package com.example.talabatend.Admin;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.talabatend.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -25,7 +26,7 @@ import java.util.HashMap;
 public class AdminMaintainProductsActivity extends AppCompatActivity
 {
 
-    private Button applychangesbtn;
+    private Button applychangesbtn,deletebtn;
     private EditText name,price,description;
     private ImageView imageView;
     private String productid = "";
@@ -43,6 +44,7 @@ public class AdminMaintainProductsActivity extends AppCompatActivity
 
 
         applychangesbtn = findViewById(R.id.apply_cahnges_maintain_btn);
+        deletebtn = findViewById(R.id.delete_product_maintain_btn);
         name = findViewById(R.id.product_name_maintain);
         price = findViewById(R.id.product_price_maintain);
         description = findViewById(R.id.product_description_maintain);
@@ -60,6 +62,38 @@ public class AdminMaintainProductsActivity extends AppCompatActivity
             }
         });
 
+        deletebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+
+                deletethisproduct();
+
+            }
+        });
+
+
+    }
+
+
+
+
+    private void deletethisproduct()
+
+    {
+
+        productsref.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task)
+            {
+                Intent intent = new Intent(AdminMaintainProductsActivity.this, AdminCategoryActivity.class);
+                startActivity(intent);
+                finish();
+                Toast.makeText(AdminMaintainProductsActivity.this, "the product is deleted successfully", Toast.LENGTH_SHORT).show();
+
+
+            }
+        });
 
     }
 

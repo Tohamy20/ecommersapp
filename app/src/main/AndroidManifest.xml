@@ -19,13 +19,13 @@
         android:theme="@style/Theme.Talabatend"
         tools:targetApi="31">
         <activity
-            android:name=".AdminMaintainProductsActivity"
+            android:name=".Admin.AdminMaintainProductsActivity"
             android:exported="false" />
         <activity
-            android:name=".AdminUserProductsActivity"
+            android:name=".Admin.AdminUserProductsActivity"
             android:exported="false" />
         <activity
-            android:name=".AdminNewOrdersActivity"
+            android:name=".Admin.AdminNewOrdersActivity"
             android:exported="false" />
         <activity
             android:name=".CaptureAct"
@@ -53,10 +53,10 @@
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.Talabatend.NoActionBar" />
         <activity
-            android:name=".AdminCategoryActivity"
+            android:name=".Admin.AdminCategoryActivity"
             android:exported="false" />
         <activity
-            android:name=".AdminaddnewProductActivity"
+            android:name=".Admin.AdminaddnewProductActivity"
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"

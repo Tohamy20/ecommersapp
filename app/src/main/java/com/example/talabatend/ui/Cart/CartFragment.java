@@ -17,6 +17,7 @@ import com.example.talabatend.databinding.FragmentCartBinding;
 public class CartFragment extends Fragment {
     private FragmentCartBinding binding;
     private CartViewModel mViewModel;
+    String type = "";
 
 
     public static CartFragment newInstance() {
@@ -33,6 +34,7 @@ public class CartFragment extends Fragment {
 
         final TextView textView = binding.textCart;
         galleryViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+
         Intent intent = new Intent(getActivity(), CartActivity.class);
         startActivity(intent);
         return root;

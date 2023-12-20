@@ -1,4 +1,4 @@
-package com.example.talabatend;
+package com.example.talabatend.Admin;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.talabatend.Model.Cart;
+import com.example.talabatend.R;
 import com.example.talabatend.viewHolder.CartViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
