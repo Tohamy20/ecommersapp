@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.DatePicker;
+import android.app.DatePickerDialog;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
+//import com.rey.material.app.DatePickerDialog;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
@@ -28,7 +31,7 @@ import java.util.HashMap;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends AppCompatActivity  {
 
     private CircleImageView profileimageviewbtn;
     private EditText fullnameedittxt,userphoneedittxt,addressedittext,passwordedittxt,editText_yeare,editText_m,editText_d;
@@ -39,6 +42,8 @@ public class SettingsActivity extends AppCompatActivity {
     private StorageReference storageprofilepictureref;
     private String checker = "";
     private Button sequrityquestionbtn;
+    private TextView dateText;
+    private Button dateBtn;
 
 
 
@@ -56,12 +61,17 @@ public class SettingsActivity extends AppCompatActivity {
         profilechangetxtbtn = (TextView) findViewById(R.id.profile_image_change_btn);
         saveTextbutton = (TextView) findViewById(R.id.update_account_settings_btn);
         closetxtbtn = (TextView) findViewById(R.id.close_settings_btn);
-        editText_yeare=(EditText) findViewById(R.id.editTextText_year_settings);
-        editText_m=(EditText) findViewById(R.id.editText_month_settings);
-        editText_d=(EditText) findViewById(R.id.editTextText_day_settings);
+        dateText = findViewById(R.id.dateText);
+        dateBtn = findViewById(R.id.dateBtn);
         sequrityquestionbtn = findViewById(R.id.settings_security_questions_btn);
 
+        dateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openDialog();
 
+            }
+        });
 
         userinfodisplay(profileimageviewbtn,fullnameedittxt,userphoneedittxt,addressedittext,passwordedittxt);
         closetxtbtn.setOnClickListener(new View.OnClickListener() {
@@ -114,6 +124,15 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
     }
+    private  void openDialog(){
+            DatePickerDialog dialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                    dateText.setText(String.valueOf(year)+'.'+String.valueOf(month+1)+'.'+String.valueOf(day));
+                }
+            }, 2002, 0, 4);
+            dialog.show();
+    }
 
     private void updateonlyuserinfo()
     {
@@ -138,33 +157,17 @@ public class SettingsActivity extends AppCompatActivity {
         {
 
             Toast.makeText(this, "please enter phone ", Toast.LENGTH_SHORT).show();
-        } else if (TextUtils.isEmpty(editText_yeare.getText().toString()))
-        {
-            Toast.makeText(this, "please enter year ", Toast.LENGTH_SHORT).show();
-
-        } else if (TextUtils.isEmpty(editText_m.getText().toString()))
-        {
-            Toast.makeText(this, "please enter month ", Toast.LENGTH_SHORT).show();
-
-        }
-        else if (TextUtils.isEmpty(editText_d.getText().toString()))
-        {
-            Toast.makeText(this, "please enter Day ", Toast.LENGTH_SHORT).show();
-
         }
         else
         {
 
-            String birth_Y = editText_yeare.getText().toString();
-            String birth_m = editText_m.getText().toString();
-            String birth_d = editText_d.getText().toString();
-            String birth = birth_d + "-" + birth_m + "-" + birth_Y;
+
 
             usermap.put("name", fullnameedittxt.getText().toString());
             usermap.put("address", addressedittext.getText().toString());
             usermap.put("phoneOrder", userphoneedittxt.getText().toString());
             usermap.put("password", passwordedittxt.getText().toString());
-            usermap.put("BirthDay", birth);
+            usermap.put("BirthDay", dateText.getText().toString());
 
 
             ref.child(Prevalent.currentonlineuser.getPhone()).updateChildren(usermap);

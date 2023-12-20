@@ -133,46 +133,20 @@
         android:hint="password ...."
         android:minHeight="48dp"
         android:padding="10dp" />
-    <EditText
-        android:id="@+id/editTextText_year_settings"
+    <TextView
+        android:id="@+id/dateText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="year"
-        android:inputType="text"
-        android:layout_alignParentStart="true"
-        android:layout_marginEnd="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_below="@id/settings_new_pass"
-        />
-    <EditText
-        android:id="@+id/editTextText_day_settings"
+        android:layout_below="@+id/settings_new_pass"
+        android:layout_marginStart="20dp"/>
+    <Button
+        android:id="@+id/dateBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/set_date_of_birth"
+        android:layout_below="@+id/settings_new_pass"
+        android:layout_marginStart="150dp"/>
 
-        android:layout_marginTop="4dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="day"
-        android:inputType="text"
-        android:layout_below="@id/editTextText_year_settings"
-
-         />
-
-    <EditText
-        android:id="@+id/editText_month_settings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="4dp"
-        android:ems="10"
-        android:hint="month"
-        android:inputType="text"
-        android:layout_below="@id/editTextText_day_settings"
-
-
-         />
     <Button
         android:id="@+id/settings_security_questions_btn"
         android:layout_width="wrap_content"
@@ -183,9 +157,9 @@
         android:text="Set security questions"
         android:inputType="text"
         android:background="@color/design_default_color_primary_dark"
-        android:layout_below="@id/editText_month_settings"
         android:layout_alignParentEnd="true"
         android:textColor="@color/white"
+        android:layout_below="@+id/dateBtn"
 
 
         />
