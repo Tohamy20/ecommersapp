@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
     private ProgressDialog loadingbar;
     private String parentdbname="Users";
     private CheckBox checkBoxRememberme;
-    private TextView adminlink,notadmin;
+    private TextView adminlink,notadmin,forgetpasswordlink;
 
 
 
@@ -47,6 +47,8 @@ public class LoginActivity extends AppCompatActivity {
         pass_log = (EditText) findViewById(R.id.login_password);
         adminlink = (TextView) findViewById(R.id.admin_panel_link);
         notadmin = (TextView) findViewById(R.id.not_admin_panel_link);
+        forgetpasswordlink = findViewById(R.id.forgot_password);
+
 
         loadingbar = new ProgressDialog(this);
         checkBoxRememberme = (CheckBox) findViewById(R.id.remeber_me_chkb);
@@ -59,6 +61,15 @@ public class LoginActivity extends AppCompatActivity {
 
                 loginuser();
 
+            }
+        });
+        forgetpasswordlink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(LoginActivity.this,ResetPasswordActivity.class);
+                intent.putExtra("check","login");
+                startActivity(intent);
             }
         });
         adminlink.setOnClickListener(new View.OnClickListener() {

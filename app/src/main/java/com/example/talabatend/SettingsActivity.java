@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +38,7 @@ public class SettingsActivity extends AppCompatActivity {
     private StorageTask uploadtask;
     private StorageReference storageprofilepictureref;
     private String checker = "";
+    private Button sequrityquestionbtn;
 
 
 
@@ -57,6 +59,8 @@ public class SettingsActivity extends AppCompatActivity {
         editText_yeare=(EditText) findViewById(R.id.editTextText_year_settings);
         editText_m=(EditText) findViewById(R.id.editText_month_settings);
         editText_d=(EditText) findViewById(R.id.editTextText_day_settings);
+        sequrityquestionbtn = findViewById(R.id.settings_security_questions_btn);
+
 
 
         userinfodisplay(profileimageviewbtn,fullnameedittxt,userphoneedittxt,addressedittext,passwordedittxt);
@@ -65,6 +69,19 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(View v)
             {
                 finish();
+
+            }
+        });
+
+        sequrityquestionbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(SettingsActivity.this,ResetPasswordActivity.class);
+                intent.putExtra("check","settings");
+                startActivity(intent);
+
+
 
             }
         });

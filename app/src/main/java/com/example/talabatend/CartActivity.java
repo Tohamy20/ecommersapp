@@ -52,7 +52,7 @@ public class CartActivity extends AppCompatActivity
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         nextprocessbuttn = (Button) findViewById(R.id.next_process_btn);
-        txttotalamount = (TextView) findViewById(R.id.total_price);
+        txttotalamount = (TextView) findViewById(R.id.page_title);
         txtmsg1 = (TextView) findViewById(R.id.msg1);
 
 
