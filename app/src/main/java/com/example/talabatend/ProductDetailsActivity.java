@@ -40,12 +40,15 @@ private int quantity = 1;
 
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
         productid = getIntent().getStringExtra("pid");
+
         quantityaddtocartbutton = (Button)findViewById(R.id.details_quantity_to_cart_btn);
         addtocartbutton = (Button)findViewById(R.id.details_add_to_cart_btn);
         productprice = (TextView) findViewById(R.id.product_price_details);
