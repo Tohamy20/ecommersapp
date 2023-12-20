@@ -38,6 +38,7 @@ public class HomeActivity extends AppCompatActivity {
     private DatabaseReference productsref;
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
+    private String type = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,18 @@ public class HomeActivity extends AppCompatActivity {
 
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+
+
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        if (bundle!=null)
+        {
+            type = getIntent().getExtras().get("Admin").toString();
+        }
+
+
         productsref = FirebaseDatabase.getInstance().getReference().child("Products");
 
         setSupportActionBar(binding.appBarHome.toolbar);
@@ -74,10 +87,13 @@ public class HomeActivity extends AppCompatActivity {
         View headerview = navigationView.getHeaderView(0);
         TextView usernametextview = headerview.findViewById(R.id.user_profile_name);
         CircleImageView profileimageview = headerview.findViewById(R.id.user_profile_image);
-        usernametextview.setText(Prevalent.currentonlineuser.getName());
+       if (!type.equals("Admin"))
+       {
+           usernametextview.setText(Prevalent.currentonlineuser.getName());
+           Picasso.get().load(Prevalent.currentonlineuser.getImage()).placeholder(R.drawable.profile).into(profileimageview);
 
 
-        Picasso.get().load(Prevalent.currentonlineuser.getImage()).placeholder(R.drawable.profile).into(profileimageview);
+       }
 
         recyclerView = findViewById(R.id.recycle_menu);
         recyclerView.setHasFixedSize(true);
@@ -108,14 +124,27 @@ public class HomeActivity extends AppCompatActivity {
                 holder.txtproductdescription.setText(model.getDescription());
                 holder.txtproductprice.setText( "price = " +model.getPrice() + "$");
                 Picasso.get().load(model.getImage()).into(holder.imageView);
+
                 holder.imageView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v)
 
                     {
-                        Intent intent = new Intent(HomeActivity.this , ProductDetailsActivity.class);
-                        intent.putExtra("pid",model.getPid());
-                        startActivity(intent);
+                        if (type.equals("Admin"))
+                        {
+                            Intent intent = new Intent(HomeActivity.this , AdminMaintainProductsActivity.class);
+                            intent.putExtra("pid",model.getPid());
+                            startActivity(intent);
+                        }
+                        else
+                        {
+                            Intent intent = new Intent(HomeActivity.this , ProductDetailsActivity.class);
+                            intent.putExtra("pid",model.getPid());
+                            startActivity(intent);
+
+                        }
+
+
 
 
                     }

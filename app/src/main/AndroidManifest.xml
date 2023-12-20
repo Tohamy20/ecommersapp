@@ -19,6 +19,9 @@
         android:theme="@style/Theme.Talabatend"
         tools:targetApi="31">
         <activity
+            android:name=".AdminMaintainProductsActivity"
+            android:exported="false" />
+        <activity
             android:name=".AdminUserProductsActivity"
             android:exported="false" />
         <activity

@@ -1,5 +1,6 @@
 package com.example.talabatend;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -49,7 +51,7 @@ public class AdminNewOrdersActivity extends AppCompatActivity
         FirebaseRecyclerAdapter<AdminOrders,AdminOrdersViewHolder> adapter =
                     new FirebaseRecyclerAdapter<AdminOrders, AdminOrdersViewHolder>(options) {
                         @Override
-                        protected void onBindViewHolder(@NonNull AdminOrdersViewHolder holder, int position, @NonNull AdminOrders model)
+                        protected void onBindViewHolder(@NonNull AdminOrdersViewHolder holder,int position, @NonNull AdminOrders model)
                         {
 
                             holder.username.setText("Name :" + model.getName());
@@ -68,6 +70,39 @@ public class AdminNewOrdersActivity extends AppCompatActivity
                                     Intent intent = new Intent(AdminNewOrdersActivity.this, AdminUserProductsActivity.class);
                                     intent.putExtra("uid",uid);
                                     startActivity(intent);
+
+                                }
+                            });
+                            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v)
+                                {
+                                    CharSequence options[] = new CharSequence[]
+                                            {
+                                                    "Yes",
+                                                    "No"
+
+                                            };
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(AdminNewOrdersActivity.this);
+                                    builder.setTitle("Have you shipped this order");
+                                    builder.setItems(options, new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which)
+                                        {
+                                            if (which == 0)
+                                            {
+                                                String uid = getRef(position).getKey();
+                                                RemoveOrder(uid);
+                                            }
+                                            else
+                                            {
+                                                finish();
+                                            }
+
+                                        }
+                                    });
+                                    builder.show();
+
 
                                 }
                             });
@@ -92,6 +127,8 @@ public class AdminNewOrdersActivity extends AppCompatActivity
         adapter.startListening();
     }
 
+
+
     public static class AdminOrdersViewHolder extends RecyclerView.ViewHolder
     {
         public TextView username,userphonenumber,usertotalprice,userdatetime,usershippingaddress;
@@ -114,5 +151,20 @@ public class AdminNewOrdersActivity extends AppCompatActivity
 
         }
     }
+    private void RemoveOrder(String uid)
+    {
+
+        ordersref.child(uid).removeValue();
+
+    }
+
+
+
+
+
+
+
+
+
 
 }
